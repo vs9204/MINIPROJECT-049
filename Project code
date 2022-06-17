@@ -1,0 +1,76 @@
+#include <stdio.h>
+
+void input(char *pvt, int *pdr)
+{
+    printf("Enter your vehicle type : c or C for Car, b or B for Bus, t or T for Tempo : ");
+    scanf("%c",pvt);
+
+    printf("\nEnter the duration of parking : ");
+    scanf("%d",pdr);
+}
+void compute(char vt, int dr, float *rate1, float *rate2)
+{
+    switch(vt)
+    {
+        case 'c':
+        case 'C':
+            if (dr<=2)
+            {
+                *rate1 = 20*dr;
+                *rate2 = 0;
+            }
+            else
+            {
+                *rate1 = 20*2;
+                *rate2 = 30*(dr-2);
+            }
+            break;
+        
+        case 'b' :
+        case 'B' :
+            if (dr<=2)
+            {
+                *rate1 = 40*dr;
+                *rate2 = 0;
+            }
+            else
+            {
+                *rate1 = 40*2;
+                *rate2 = 50*(dr-2);
+            }
+            break;
+        
+        case 't' :
+        case 'T' :
+            if (dr<=2)
+            {
+                *rate1 = 30*dr;
+                *rate2 = 0;
+            }
+            else
+            {
+                *rate1 = 30*2;
+                *rate2 = 40*(dr-2);
+            }
+            break;
+        
+        default: printf("\nYou have entered an invalid vehicle type");
+            break;
+    }
+}
+void output(int dr, float rate1, float rate2)
+{
+    printf("\nThe charges for the first 2 hours : %f",rate1);
+    printf("\nThe charges for the next %d hours : %f",dr-2, rate2);
+    printf("\nThe total Parking charges are : %f",rate1 + rate2);
+}
+int main()
+{
+    char vt;
+    int dr;
+    float rate1, rate2;
+    input(&vt, &dr);
+    compute(vt , dr, &rate1, &rate2);
+    output(dr, rate1, rate2);
+    return 0;
+}
